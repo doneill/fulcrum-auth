@@ -44,6 +44,9 @@ kotlin {
         implementation(Coroutines.COMMON)
         // Ktor
         implementation(Ktor.COMMON_CORE)
+        implementation(Ktor.AUTH)
+        implementation(Ktor.AUTH_JVM)
+        implementation(Ktor.AUTH_NATIVE)
         // Serialize
         implementation(Kotlin.SERIALIZATION_COMMON)
         // SQL Delight
@@ -106,7 +109,7 @@ val packForXcode by tasks.creating(Sync::class) {
 }
 
 sqldelight {
-    database("KmpDb") {
+    database("FulcrumAuth") {
         packageName = "com.jdoneill.db"
         sourceFolders = listOf("sqldelight")
     }

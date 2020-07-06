@@ -50,7 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FEC5DF7422794BB2004F7259 /* Mpp Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mpp Playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEC5DF7422794BB2004F7259 /* Fulcrum Auth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fulcrum Auth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEC5DF7722794BB2004F7259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEC5DF7922794BB2004F7259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FEC5DF7C22794BB2004F7259 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		FEC5DF7522794BB2004F7259 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FEC5DF7422794BB2004F7259 /* Mpp Playground.app */,
+				FEC5DF7422794BB2004F7259 /* Fulcrum Auth.app */,
 				FEC5DF8822794BB3004F7259 /* ios-appTests.xctest */,
 				FEC5DF9322794BB3004F7259 /* ios-appUITests.xctest */,
 			);
@@ -187,7 +187,7 @@
 			);
 			name = "ios-app";
 			productName = "ios-app";
-			productReference = FEC5DF7422794BB2004F7259 /* Mpp Playground.app */;
+			productReference = FEC5DF7422794BB2004F7259 /* Fulcrum Auth.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FEC5DF8722794BB3004F7259 /* ios-appTests */ = {
@@ -509,8 +509,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jdoneill.mpp;
-				PRODUCT_NAME = "Mpp Playground";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jdoneill.fulcrumauth;
+				PRODUCT_NAME = "Fulcrum Auth";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -529,8 +529,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jdoneill.mpp;
-				PRODUCT_NAME = "Mpp Playground";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jdoneill.fulcrumauth;
+				PRODUCT_NAME = "Fulcrum Auth";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

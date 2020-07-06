@@ -3,34 +3,34 @@ package com.jdoneill.ktmultiplatform.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.widget.Button
+import android.widget.EditText
+import com.jdoneill.api.FulcrumApi
 
-import com.jdoneill.api.RestApi
-import com.jdoneill.common.KmpDriverFactory
+import com.jdoneill.common.FulcrumAuthDriverFactory
 import com.jdoneill.common.createDb
-import com.jdoneill.ktmultiplatform.BuildConfig
+import com.jdoneill.db.FulcrumUserModelQueries
 import com.jdoneill.ktmultiplatform.R
-import com.jdoneill.common.getDate
-import com.jdoneill.db.KmpModelQueries
-import com.jdoneill.model.WeatherResponse
+import com.jdoneill.model.FulcrumAuthenticationResponse
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
-import kotlin.random.Random
 
-const val APIKEY = BuildConfig.OPENWEATHER_API_KEY
-
-const val DEGREE: String = "\u00B0"
+import java.util.Base64
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var job: Job
-    private lateinit var api: RestApi
+    private lateinit var api: FulcrumApi
 
-    private lateinit var kmpQuery: KmpModelQueries
+    private lateinit var loginButton: Button
+    private lateinit var userEmailField: EditText
+    private lateinit var userPasswordField: EditText
+
+    private lateinit var fulcrumUserQuery: FulcrumUserModelQueries
 
     override val coroutineContext: CoroutineContext
         get() = job + Main
@@ -39,74 +39,42 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val driver = KmpDriverFactory(this)
+        userEmailField = findViewById(R.id.user_email_view)
+        userPasswordField = findViewById(R.id.user_password_view)
+
+        loginButton = findViewById(R.id.login_button)
+
+        loginButton.setOnClickListener {
+            val user = userEmailField.text.toString()
+            val password = userPasswordField.text.toString()
+            getAccount(user, password)
+        }
+
+        val driver = FulcrumAuthDriverFactory(this)
         val db = createDb(driver)
-        kmpQuery = db.kmpModelQueries
+        fulcrumUserQuery = db.fulcrumUserModelQueries
 
         job = Job()
-        api = RestApi()
-
-        val location = randomWaCoords()
-        Log.d("Random", location.toString())
-        getWeather(location, APIKEY)
-
-        findViewById<TextView>(R.id.date_view).text = getDate()
+        api = FulcrumApi()
     }
 
-    private fun getWeather(latLng: Pair<Double, Double>, apiKey: String) {
-        api.getWeather(
-            lat = latLng.first.toString(),
-            lng = latLng.second.toString(),
-            apiKey = apiKey,
-            success = ::parseResponse,
+    private fun getAccount(user: String, password: String) {
+        val auth = Base64.getEncoder().encodeToString("$user:$password".toByteArray())
+        api.getAccount(
+            authorization = auth,
+            success = ::parseUser,
             failure = ::handleError
         )
     }
 
-    private fun parseResponse(response: WeatherResponse) {
+    private fun parseUser(response: FulcrumAuthenticationResponse) {
         launch(Main) {
-            val name = response.name
-            val temp = response.main.temp
-            val id = response.id
-
-            kmpQuery.insertWeather(id, name, temp.toDouble(), getDate())
-            val results = kmpQuery.selectAll().executeAsList()
-
-            for (result in results) {
-                Log.d("Weather DB Row", result.id.toString() + " | " + result.name + " | " + result.latest_temp)
+            for (context in response.user.contexts) {
+                val name = context.name
+                val apiToken = context.api_token
+                Log.d("Context", "$name : $apiToken")
             }
-
-            val feelsLikeTemp = response.main.feels_like
-            val tempMax = response.main.temp_max
-            val tempMin = response.main.temp_min
-            val pressure = response.main.pressure
-            val humidity = response.main.humidity
-
-            val weatherDisplay = getString(R.string.weather_text,
-                                                                name,
-                                                                temp, DEGREE,
-                                                                feelsLikeTemp, DEGREE,
-                                                                tempMax, DEGREE,
-                                                                tempMin, DEGREE,
-                                                                pressure,
-                                                                humidity)
-
-            findViewById<TextView>(R.id.weather_view).text = weatherDisplay
         }
-    }
-
-    private fun randomWaCoords():Pair<Double, Double> {
-        val random = Random.Default
-
-        val lat = (45..49).shuffled().first()
-        val latDecimal = random.nextDouble()
-        val lng = (-124..-116).shuffled().first()
-        val lngDecimal = random.nextDouble()
-
-        val y = lat + latDecimal
-        val x = lng + lngDecimal
-
-        return Pair(y, x)
     }
 
     private fun handleError(ex: Throwable) {

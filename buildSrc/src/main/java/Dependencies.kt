@@ -32,7 +32,7 @@ object Plugins {
 
 object Kotlin {
     const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.SERIALIZER}"
-    const val SERIALIZATION_COMMON = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.SERIALIZER}"
+    const val SERIALIZATION_COMMON = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${Versions.SERIALIZER}"
     const val SERIALIZATION_IOS = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:${Versions.SERIALIZER}"
 }
 
@@ -52,6 +52,10 @@ object Ktor {
     const val COMMON_SERIALIZATION ="io.ktor:ktor-client-serialization:${Versions.KTOR}"
     const val ANDROID_SERIALZATION ="io.ktor:ktor-client-serialization-jvm:${Versions.KTOR}"
     const val IOS_SERIALIZATION ="io.ktor:ktor-client-serialization-native:${Versions.KTOR}"
+    // auth
+    const val AUTH = "io.ktor:ktor-client-auth:${Versions.KTOR}"
+    const val AUTH_JVM = "io.ktor:ktor-client-auth-jvm:${Versions.KTOR}"
+    const val AUTH_NATIVE = "io.ktor:ktor-client-auth-native:${Versions.KTOR}"
 }
 
 object SqlDelight{
