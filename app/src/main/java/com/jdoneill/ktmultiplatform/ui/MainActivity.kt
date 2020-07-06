@@ -69,10 +69,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private fun parseUser(response: FulcrumAuthenticationResponse) {
         launch(Main) {
+            Log.d("Context", "User ID: ${response.user.id}")
             for (context in response.user.contexts) {
                 val name = context.name
+                val id = context.id
                 val apiToken = context.api_token
-                Log.d("Context", "$name : $apiToken")
+                Log.d("Context", "$name | Org ID : $id | Api Token : $apiToken")
             }
         }
     }

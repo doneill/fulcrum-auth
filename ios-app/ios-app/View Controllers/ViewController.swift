@@ -48,13 +48,17 @@ class ViewController: UIViewController {
     }
     
     func parseAccount(response: FulcrumAuthenticationResponse) {
+        let userID = response.user.id
+        print("User ID: " + userID)
+        
         let contexts = response.user.contexts as [Contexts]
         
         for context in contexts {
             let name = context.name
+            let orgID = context.id
             let apiToken = context.api_token
             
-            print(name + " : " + apiToken)
+            print(name + " : " + orgID + " : " + apiToken)
         }
     }
     
