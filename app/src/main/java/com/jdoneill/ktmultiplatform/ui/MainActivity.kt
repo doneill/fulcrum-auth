@@ -9,7 +9,8 @@ import com.jdoneill.api.FulcrumApi
 
 import com.jdoneill.common.FulcrumAuthDriverFactory
 import com.jdoneill.common.createDb
-import com.jdoneill.db.FulcrumUserModelQueries
+import com.jdoneill.db.FulcrumAuth
+import com.jdoneill.db.FulcrumAuthModelQueries
 import com.jdoneill.ktmultiplatform.R
 import com.jdoneill.model.FulcrumAuthenticationResponse
 
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var userEmailField: EditText
     private lateinit var userPasswordField: EditText
 
-    private lateinit var fulcrumUserQuery: FulcrumUserModelQueries
+    private lateinit var fulcrumDb: FulcrumAuth
+    private lateinit var fulcrumAuthQuery: FulcrumAuthModelQueries
 
     override val coroutineContext: CoroutineContext
         get() = job + Main
@@ -51,8 +53,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
 
         val driver = FulcrumAuthDriverFactory(this)
-        val db = createDb(driver)
-        fulcrumUserQuery = db.fulcrumUserModelQueries
+        fulcrumDb = createDb(driver)
+        fulcrumAuthQuery = fulcrumDb.fulcrumAuthModelQueries
 
         job = Job()
         api = FulcrumApi()
@@ -70,11 +72,22 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun parseUser(response: FulcrumAuthenticationResponse) {
         launch(Main) {
             Log.d("Context", "User ID: ${response.user.id}")
+
+            val id = response.user.id
+            val firstName = response.user.first_name
+            val lastName = response.user.last_name
+            val email = response.user.email
+
+            fulcrumAuthQuery.insertUsers(id, firstName, lastName, email)
+
             for (context in response.user.contexts) {
                 val name = context.name
-                val id = context.id
+                val contextId = context.id
                 val apiToken = context.api_token
-                Log.d("Context", "$name | Org ID : $id | Api Token : $apiToken")
+
+                fulcrumAuthQuery.insertOrgs(contextId, id, name, apiToken)
+
+                Log.d("Context", "$name | Org ID : $contextId | Api Token : $apiToken")
             }
         }
     }
