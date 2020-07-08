@@ -1,0 +1,48 @@
+CREATE TABLE users (
+    id TEXT NOT NULL PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+selectAllUsers:
+SELECT * FROM users;
+
+selectByUserId:
+SELECT * FROM users WHERE id = ?;
+
+selectByUserName:
+SELECT * FROM users WHERE first_name = ? AND last_name = ?;
+
+insertUsers:
+INSERT OR REPLACE INTO users(id, first_name, last_name, email)
+VALUES (?,?,?,?);
+
+deleteAllUsers:
+DELETE FROM users;
+
+CREATE TABLE organizations (
+    id TEXT NOT NULL PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    name TEXT NOT NULL,
+    token TEXT NOT NULL
+);
+
+selectAllOrganizations:
+SELECT * FROM organizations;
+
+selecdtByOrgId:
+SELECT * FROM organizations WHERE id = ?;
+
+selectUsersByOrgId:
+SELECT * FROM organizations WHERE user_id = ?;
+
+selecdByOrgName:
+SELECT * FROM organizations WHERE name = ?;
+
+insertOrgs:
+INSERT OR REPLACE INTO organizations(id, user_id, name, token)
+VALUES (?,?,?,?);
+
+deleteAllOrgs:
+DELETE FROM organizations;
