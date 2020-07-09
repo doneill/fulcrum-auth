@@ -8,11 +8,8 @@ CREATE TABLE users (
 selectAllUsers:
 SELECT * FROM users;
 
-selectByUserId:
+selectUserByUserId:
 SELECT * FROM users WHERE id = ?;
-
-selectByUserName:
-SELECT * FROM users WHERE first_name = ? AND last_name = ?;
 
 insertUsers:
 INSERT OR REPLACE INTO users(id, first_name, last_name, email)
@@ -31,13 +28,13 @@ CREATE TABLE organizations (
 selectAllOrganizations:
 SELECT * FROM organizations;
 
-selecdtByOrgId:
+selecdtOrganizationByOrgId:
 SELECT * FROM organizations WHERE id = ?;
 
-selectUsersByOrgId:
+selectOrganizationByUserId:
 SELECT * FROM organizations WHERE user_id = ?;
 
-selecdByOrgName:
+selecdOrganizationByName:
 SELECT * FROM organizations WHERE name = ?;
 
 insertOrgs:
@@ -46,3 +43,8 @@ VALUES (?,?,?,?);
 
 deleteAllOrgs:
 DELETE FROM organizations;
+
+selectJoinUserOrgByUserId:
+SELECT first_name, last_name, name, token FROM users INNER JOIN organizations ON organizations.user_id = users.id WHERE users.id = ?;
+VALUES(?);
+
