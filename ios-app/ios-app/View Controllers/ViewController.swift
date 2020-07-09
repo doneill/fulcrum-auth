@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
+    weak var fulcrumAuthQuery: FulcrumAuthModelQueries!
+    
     internal var api = FulcrumApi()
 
     override func viewDidLoad() {
@@ -22,6 +24,10 @@ class ViewController: UIViewController {
         
         userPasswordField.isSecureTextEntry.toggle()
         userPasswordField.clearButtonMode = .whileEditing
+        
+        let driver = FulcrumAuthDriverFactory()
+        let db = FulcrumAuthDriverFactoryKt.createDb(fulcrumAuthDriverFactory: driver)
+        fulcrumAuthQuery = db.fulcrumAuthModelQueries
     
     }
     
@@ -49,7 +55,11 @@ class ViewController: UIViewController {
     
     func parseAccount(response: FulcrumAuthenticationResponse) {
         let userID = response.user.id
-        print("User ID: " + userID)
+        let firstName = response.user.first_name
+        let lastName = response.user.last_name
+        let email = response.user.email
+        
+        fulcrumAuthQuery.insertUsers(id: userID, first_name: firstName, last_name: lastName, email: email)
         
         let contexts = response.user.contexts as [Contexts]
         
@@ -58,8 +68,26 @@ class ViewController: UIViewController {
             let orgID = context.id
             let apiToken = context.api_token
             
-            print(name + " : " + orgID + " : " + apiToken)
+            fulcrumAuthQuery.insertOrgs(id: orgID, user_id: userID, name: name, token: apiToken)
+            
         }
+        
+        let infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(id: userID).executeAsList()
+        
+        for info in infos {
+            print(info)
+        }
+        
+//        let userData = fulcrumAuthQuery.selectAllUsers().executeAsList()
+//        for user in userData {
+//            print(user)
+//        }
+//
+//        let orgs = fulcrumAuthQuery.selectAllOrganizations().executeAsList()
+//        for org in orgs {
+//            print(org)
+//        }
+        
     }
     
     
