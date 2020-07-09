@@ -64,15 +64,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val auth = Base64.getEncoder().encodeToString("$user:$password".toByteArray())
         api.getAccount(
             authorization = auth,
-            success = ::parseUser,
+            success = ::parseAccount,
             failure = ::handleError
         )
     }
 
-    private fun parseUser(response: FulcrumAuthenticationResponse) {
+    private fun parseAccount(response: FulcrumAuthenticationResponse) {
         launch(Main) {
-            Log.d("Context", "User ID: ${response.user.id}")
-
             val id = response.user.id
             val firstName = response.user.first_name
             val lastName = response.user.last_name
@@ -86,8 +84,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 val apiToken = context.api_token
 
                 fulcrumAuthQuery.insertOrgs(contextId, id, name, apiToken)
+            }
 
-                Log.d("Context", "$name | Org ID : $contextId | Api Token : $apiToken")
+            val infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(id).executeAsList()
+            for ( info in infos ) {
+                Log.d("FulcrumAuth", info.toString())
             }
         }
     }
