@@ -1,5 +1,7 @@
 # Fulcrum Auth
-Kotlin Multiplatform app
+Kotlin Multiplatform app containing authentication with [Fulcrum](https://www.fulcrumapp.com/)
+
+![fulcrum auth image](fulcrum-auth.png)
 
 ## Dependencies
  - [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
