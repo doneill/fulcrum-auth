@@ -5,19 +5,6 @@ CREATE TABLE users (
     email TEXT NOT NULL
 );
 
-selectAllUsers:
-SELECT * FROM users;
-
-selectUserByUserId:
-SELECT * FROM users WHERE id = ?;
-
-insertUsers:
-INSERT OR REPLACE INTO users(id, first_name, last_name, email)
-VALUES (?,?,?,?);
-
-deleteAllUsers:
-DELETE FROM users;
-
 CREATE TABLE organizations (
     id TEXT NOT NULL PRIMARY KEY,
     user_id TEXT NOT NULL,
@@ -25,10 +12,24 @@ CREATE TABLE organizations (
     token TEXT NOT NULL
 );
 
+insertOrgs:
+INSERT OR REPLACE INTO organizations(id, user_id, name, token)
+VALUES (?,?,?,?);
+
+insertUsers:
+INSERT OR REPLACE INTO users(id, first_name, last_name, email)
+VALUES (?,?,?,?);
+
+selectAllUsers:
+SELECT * FROM users;
+
+selectUserByUserId:
+SELECT * FROM users WHERE id = ?;
+
 selectAllOrganizations:
 SELECT * FROM organizations;
 
-selecdtOrganizationByOrgId:
+selectUserByOrganizationId:
 SELECT * FROM organizations WHERE id = ?;
 
 selectOrganizationByUserId:
@@ -37,12 +38,11 @@ SELECT * FROM organizations WHERE user_id = ?;
 selecdOrganizationByName:
 SELECT * FROM organizations WHERE name = ?;
 
-insertOrgs:
-INSERT OR REPLACE INTO organizations(id, user_id, name, token)
-VALUES (?,?,?,?);
-
 deleteAllOrgs:
 DELETE FROM organizations;
+
+deleteAllUsers:
+DELETE FROM users;
 
 selectJoinUserOrgByUserId:
 SELECT first_name, last_name, name, token FROM users INNER JOIN organizations ON organizations.user_id = users.id WHERE users.id = ?;
