@@ -51,7 +51,12 @@ dependencies { implementation(project(":common"))
     implementation (SupportLibs.ANDROIDX_APPCOMPAT)
     implementation (SupportLibs.ANDROIDX_CORE_KTX)
     implementation (SupportLibs.ANDROIDX_CONSTRAINT_LAYOUT)
+
+    // testing
+    testImplementation (TestingLib.HAMCREST)
     testImplementation (TestingLib.JUNIT)
+    testImplementation (SqlDelight.SQLITE_TEST_DRIVER)
+    testImplementation (TestingLib.TRUTH)
     androidTestImplementation (AndroidTestingLib.ANDROIDX_TEST_EXT_JUNIT)
 }
 

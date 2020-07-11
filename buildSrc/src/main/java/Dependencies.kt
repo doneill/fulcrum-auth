@@ -15,8 +15,11 @@ object Versions {
     // testing dependencies
     const val ANDROIDX_TEST_EXT = "1.1.1"
     const val ANDROIDX_TEST = "1.2.0"
+    const val HAMCREST = "1.3"
     const val JUNIT = "4.13"
     const val ESPRESSO_CORE = "3.2.0"
+    const val SQLITE_DRIVER = "1.3.0"
+    const val TRUTH = "1.0.1"
 }
 
 object BuildPluginsVersion {
@@ -65,6 +68,7 @@ object SqlDelight{
     const val RUNTIME_DRIVER_COMMON = "com.squareup.sqldelight:sqlite-driver:${Versions.SQLDELIGHT}"
     const val RUNTIME_DRIVER_IOS = "com.squareup.sqldelight:native-driver:${Versions.SQLDELIGHT}"
     const val RUNTIME_DRIVER_ANDROID = "com.squareup.sqldelight:android-driver:${Versions.SQLDELIGHT}"
+    const val SQLITE_TEST_DRIVER = "com.squareup.sqldelight:sqlite-driver:${Versions.SQLITE_DRIVER}"
 }
 
 object SupportLibs {
@@ -74,7 +78,9 @@ object SupportLibs {
 }
 
 object TestingLib {
+    const val HAMCREST = "org.hamcrest:hamcrest-library:${Versions.HAMCREST}"
     const val JUNIT = "junit:junit:${Versions.JUNIT}"
+    const val TRUTH = "com.google.truth:truth:${Versions.TRUTH}"
 }
 
 object AndroidTestingLib {
