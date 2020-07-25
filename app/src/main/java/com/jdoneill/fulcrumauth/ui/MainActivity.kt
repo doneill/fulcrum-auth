@@ -1,4 +1,4 @@
-package com.jdoneill.ktmultiplatform.ui
+package com.jdoneill.fulcrumauth.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +18,7 @@ import com.jdoneill.common.createDb
 import com.jdoneill.db.FulcrumAuth
 import com.jdoneill.db.FulcrumAuthModelQueries
 import com.jdoneill.db.SelectJoinUserOrgByUserId
-import com.jdoneill.ktmultiplatform.R
+import com.jdoneill.fulcrumauth.R
 import com.jdoneill.model.Contexts
 import com.jdoneill.model.FulcrumAuthenticationResponse
 

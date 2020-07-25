@@ -1,4 +1,4 @@
-package com.jdoneill.ktmultiplatform.db
+package com.jdoneill.fulcrumauth.db
 
 import com.google.common.truth.Truth.assertThat
 import com.jdoneill.db.FulcrumAuth

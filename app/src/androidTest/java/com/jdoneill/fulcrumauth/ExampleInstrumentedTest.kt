@@ -1,4 +1,4 @@
-package com.jdoneill.ktmultiplatform
+package com.jdoneill.fulcrumauth
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.jdoneill.ktmultiplatform", appContext.packageName)
+        assertEquals("com.jdoneill.fulcrumauth", appContext.packageName)
     }
 }
