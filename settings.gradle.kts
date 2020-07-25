@@ -21,7 +21,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "kotlin-multiplatform-template"
+rootProject.name = "fulcrum-auth"
 
 include(
     "app",

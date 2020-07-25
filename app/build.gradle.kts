@@ -64,5 +64,5 @@ dependencies { implementation(project(":common"))
 task<Exec>("runDebugApp") {
     dependsOn ("installDebug")
     val adb = File(System.getenv("ANDROID_HOME"), "platform-tools${File.separator}adb")
-    commandLine (adb, "shell", "am", "start", "-n", "com.jdoneill.ktmultiplatform/com.jdoneill.ktmultiplatform.ui.MainActivity")
+    commandLine (adb, "shell", "am", "start", "-n", "com.jdoneill.fulcrumauth/com.jdoneill.fulcrumauth.ui.MainActivity")
 }
