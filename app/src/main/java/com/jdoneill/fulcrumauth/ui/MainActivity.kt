@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_main)
 
         loginButton.setOnClickListener {
-
             val user = userEmailField.text.toString()
             val password = userPasswordField.text.toString()
             getAccount(user, password)

@@ -8,7 +8,7 @@
     android:padding="@dimen/layout_margin"
     tools:context=".ui.MainActivity">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/userEmailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,9 +41,9 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-<Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
-        style="@style/JDO.Theme.Widget.Button"
+        style="@style/JDO.Theme.Material.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/button_height"
@@ -53,7 +53,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userPasswordLayout"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintVertical_bias="0.10" />
 
     <TextView
         android:id="@+id/loginInfoView"
