@@ -10,6 +10,7 @@ object Versions {
     const val COROUTINES = "1.3.5-native-mt"
     const val CORE_KTX = "1.3.0"
     const val KTOR = "1.3.2"
+    const val MATERIAL = "1.3.0-alpha02"
     const val SERIALIZER = "0.20.0"
     const val SQLDELIGHT = "1.3.0"
     // testing dependencies
@@ -75,6 +76,7 @@ object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
     const val ANDROIDX_CONSTRAINT_LAYOUT = "com.android.support.constraint:constraint-layout:${Versions.CONSTRAINT_LAYOUT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
+    const val GOOGLE_MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
 }
 
 object TestingLib {

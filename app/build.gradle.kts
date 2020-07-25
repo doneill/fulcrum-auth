@@ -51,6 +51,7 @@ dependencies { implementation(project(":common"))
     implementation (SupportLibs.ANDROIDX_APPCOMPAT)
     implementation (SupportLibs.ANDROIDX_CORE_KTX)
     implementation (SupportLibs.ANDROIDX_CONSTRAINT_LAYOUT)
+    implementation (SupportLibs.GOOGLE_MATERIAL)
 
     // testing
     testImplementation (TestingLib.HAMCREST)

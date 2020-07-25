@@ -7,9 +7,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.jdoneill.api.FulcrumApi
 
@@ -21,6 +18,7 @@ import com.jdoneill.db.SelectJoinUserOrgByUserId
 import com.jdoneill.fulcrumauth.R
 import com.jdoneill.model.Contexts
 import com.jdoneill.model.FulcrumAuthenticationResponse
+import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -35,11 +33,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var job: Job
     private lateinit var api: FulcrumApi
 
-    private lateinit var loginButton: Button
-    private lateinit var userEmailField: EditText
-    private lateinit var userPasswordField: EditText
-    private lateinit var loginInfoView: TextView
-
     private lateinit var fulcrumDb: FulcrumAuth
     private lateinit var fulcrumAuthQuery: FulcrumAuthModelQueries
 
@@ -49,12 +42,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        userEmailField = findViewById(R.id.user_email_view)
-        userPasswordField = findViewById(R.id.user_password_view)
-        loginInfoView = findViewById(R.id.login_info_view)
-
-        loginButton = findViewById(R.id.login_button)
 
         loginButton.setOnClickListener {
 
@@ -80,17 +67,17 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun showAccounts(accounts: List<Contexts>) {
-        val b = AlertDialog.Builder(this)
-        b.setTitle("Select Organization")
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Select Organization")
 
         val names = arrayOfNulls<String>(accounts.size)
         for ( i in accounts.indices) {
             names[i] = accounts[i].name
         }
 
-        b.setItems(names) { _, which -> setAccount(accounts[which]) }
+        builder.setItems(names) { _, which -> setAccount(accounts[which]) }
 
-        val alert = b.create()
+        val alert = builder.create()
         alert.show()
     }
 
@@ -170,7 +157,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun handleError(ex: Throwable) {
         launch(Main) {
             val msg = ex.message
-            Log.d("Weather Response Error", msg)
+            Log.d("Authorization Response Error", msg)
         }
     }
 }
