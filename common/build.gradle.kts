@@ -20,6 +20,7 @@ android {
 
 kotlin {
     android()
+    jvm()
 
     // select iOS target platform depending on the Xcode environment variables
     // iPhone simulator : presets.iosX64 | real iDevice 64 bit : presets.iosArm64
@@ -35,6 +36,10 @@ kotlin {
                 baseName = "JDOCommon"
             }
         }
+    }
+
+    js {
+        browser {  }
     }
 
     sourceSets["commonMain"].dependencies {
@@ -78,6 +83,19 @@ kotlin {
         implementation(Kotlin.SERIALIZATION_IOS)
         // SQL Delight
         implementation(SqlDelight.RUNTIME_DRIVER_IOS)
+    }
+
+
+    sourceSets["jsMain"].dependencies {
+        implementation(kotlin("stdlib-js"))
+        // Coroutines
+        implementation(Coroutines.WEB)
+        // Ktor
+        implementation(Ktor.WEB)
+        // Serialize
+        implementation(Kotlin.SERIALIZATION_WEB)
+        // SQL Delight
+        implementation(SqlDelight.RUNTIME_DRIVER_JS)
     }
 }
 
