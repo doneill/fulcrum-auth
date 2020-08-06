@@ -1,7 +1,7 @@
-package com.jdoneill.common
+package com.jdoneill.fulcrumauth.common
 
 import android.content.Context
-import com.jdoneill.db.FulcrumAuth
+import com.jdoneill.fulcrumauth.db.FulcrumAuth
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 

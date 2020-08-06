@@ -1,4 +1,4 @@
-package com.jdoneill.common
+package com.jdoneill.fulcrumauth.common
 
 import kotlin.coroutines.*
 import kotlinx.coroutines.*

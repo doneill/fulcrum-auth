@@ -1,7 +1,7 @@
-package com.jdoneill.api
+package com.jdoneill.fulcrumauth.api
 
-import com.jdoneill.common.ApplicationDispatcher
-import com.jdoneill.model.FulcrumAuthenticationResponse
+import com.jdoneill.fulcrumauth.common.ApplicationDispatcher
+import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
 
 import io.ktor.client.request.get
 import io.ktor.client.request.header

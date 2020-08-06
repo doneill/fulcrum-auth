@@ -1,4 +1,4 @@
-package com.jdoneill.model
+package com.jdoneill.fulcrumauth.model
 
 import kotlinx.serialization.Serializable
 

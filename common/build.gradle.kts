@@ -110,7 +110,7 @@ val packForXcode by tasks.creating(Sync::class) {
 
 sqldelight {
     database("FulcrumAuth") {
-        packageName = "com.jdoneill.db"
+        packageName = "com.jdoneill.fulcrumauth.db"
         sourceFolders = listOf("sqldelight")
     }
 }

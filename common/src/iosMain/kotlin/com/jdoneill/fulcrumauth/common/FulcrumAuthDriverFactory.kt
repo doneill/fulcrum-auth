@@ -1,6 +1,6 @@
-package com.jdoneill.common
+package com.jdoneill.fulcrumauth.common
 
-import com.jdoneill.db.FulcrumAuth
+import com.jdoneill.fulcrumauth.db.FulcrumAuth
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 

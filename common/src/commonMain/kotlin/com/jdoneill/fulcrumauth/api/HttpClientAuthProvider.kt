@@ -1,4 +1,4 @@
-package com.jdoneill.api
+package com.jdoneill.fulcrumauth.api
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.auth.Auth
