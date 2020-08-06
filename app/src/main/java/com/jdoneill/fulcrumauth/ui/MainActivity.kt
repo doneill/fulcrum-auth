@@ -1,12 +1,9 @@
 package com.jdoneill.fulcrumauth.ui
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import com.jdoneill.fulcrumauth.api.FulcrumApi
 
@@ -43,26 +40,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loginButton.setOnClickListener {
-            val user = userEmailField.text.toString()
-            val password = userPasswordField.text.toString()
-            getAccount(user, password)
-        }
-
         val driver = FulcrumAuthDriverFactory(this)
         fulcrumDb = createDb(driver)
         fulcrumAuthQuery = fulcrumDb.fulcrumAuthModelQueries
 
         job = Job()
         api = FulcrumApi()
-    }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (currentFocus != null) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        loginButton.setOnClickListener {
+            val user = userEmailField.text.toString()
+            val password = userPasswordField.text.toString()
+            getAccount(user, password)
         }
-        return super.dispatchTouchEvent(ev)
     }
 
     private fun showAccounts(accounts: List<Contexts>) {
