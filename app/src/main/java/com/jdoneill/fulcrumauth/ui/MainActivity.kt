@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val organizations = fulcrumAuthQuery.selectUserByOrganizationId(orgId).executeAsList()
 
         for (org in organizations) {
-            val infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(org.user_id).executeAsList()
-            showLoginInfo(infos)
+            val orgInfo = fulcrumAuthQuery.selectJoinUserOrgByUserId(org.user_id).executeAsList()
+            showLoginInfo(orgInfo)
         }
 
     }
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun showLoginInfo(infos: List<SelectJoinUserOrgByUserId>) {
+    private fun showLoginInfo(orgInfo: List<SelectJoinUserOrgByUserId>) {
         userEmailField.visibility = View.INVISIBLE
         userPasswordField.visibility = View.INVISIBLE
         loginButton.visibility = View.INVISIBLE
@@ -132,11 +132,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         var org = ""
         var token = ""
 
-        for ( i in infos.indices ) {
-            firstName = infos[i].first_name
-            lastName = infos[i].last_name
-            org = infos[i].name
-            token = infos[i].token
+        for ( i in orgInfo.indices ) {
+            firstName = orgInfo[i].first_name
+            lastName = orgInfo[i].last_name
+            org = orgInfo[i].name
+            token = orgInfo[i].token
         }
 
         loginInfoView.text = getString(R.string.user_info, firstName, lastName, org, token)
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun handleError(ex: Throwable) {
         launch(Main) {
             val msg = ex.message
-            Log.d("Authorization Response Error", msg)
+            Log.d("Authorization Response", msg)
         }
     }
 }
