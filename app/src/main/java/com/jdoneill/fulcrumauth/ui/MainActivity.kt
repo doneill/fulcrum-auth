@@ -8,16 +8,16 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
-import com.jdoneill.api.FulcrumApi
+import com.jdoneill.fulcrumauth.api.FulcrumApi
 
-import com.jdoneill.common.FulcrumAuthDriverFactory
-import com.jdoneill.common.createDb
-import com.jdoneill.db.FulcrumAuth
-import com.jdoneill.db.FulcrumAuthModelQueries
-import com.jdoneill.db.SelectJoinUserOrgByUserId
+import com.jdoneill.fulcrumauth.common.FulcrumAuthDriverFactory
+import com.jdoneill.fulcrumauth.common.createDb
 import com.jdoneill.fulcrumauth.R
-import com.jdoneill.model.Contexts
-import com.jdoneill.model.FulcrumAuthenticationResponse
+import com.jdoneill.fulcrumauth.db.FulcrumAuth
+import com.jdoneill.fulcrumauth.db.FulcrumAuthModelQueries
+import com.jdoneill.fulcrumauth.db.SelectJoinUserOrgByUserId
+import com.jdoneill.fulcrumauth.model.Contexts
+import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
 import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.coroutines.CoroutineScope
