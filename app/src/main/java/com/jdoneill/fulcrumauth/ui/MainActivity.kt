@@ -12,7 +12,7 @@ import com.jdoneill.fulcrumauth.common.createDb
 import com.jdoneill.fulcrumauth.R
 import com.jdoneill.fulcrumauth.db.FulcrumAuth
 import com.jdoneill.fulcrumauth.db.FulcrumAuthModelQueries
-import com.jdoneill.fulcrumauth.db.SelectJoinUserOrgByUserId
+import com.jdoneill.fulcrumauth.db.SelectOrgView
 import com.jdoneill.fulcrumauth.model.Contexts
 import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
 import kotlinx.android.synthetic.main.activity_main.*
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val organizations = fulcrumAuthQuery.selectUserByOrganizationId(orgId).executeAsList()
 
         for (org in organizations) {
-            val orgInfo = fulcrumAuthQuery.selectJoinUserOrgByUserId(org.user_id).executeAsList()
+            val orgInfo = fulcrumAuthQuery.selectOrgView(org.user_id).executeAsList()
             showLoginInfo(orgInfo)
         }
 
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             if ( response.user.contexts.size > 1 ) {
                 showAccounts(response.user.contexts)
             } else {
-                val infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(id).executeAsList()
+                val infos = fulcrumAuthQuery.selectOrgView(id).executeAsList()
 
                 for ( info in infos ) {
                     Log.d("FulcrumAuth", info.toString())
@@ -120,8 +120,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun showLoginInfo(orgInfo: List<SelectJoinUserOrgByUserId>) {
+    private fun showLoginInfo(orgInfo: List<SelectOrgView>) {
         userEmailField.visibility = View.INVISIBLE
+        userPasswordLayout.visibility = View.INVISIBLE
         userPasswordField.visibility = View.INVISIBLE
         loginButton.visibility = View.INVISIBLE
 

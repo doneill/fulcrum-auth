@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         
         for organization in organizations {
             let org = organization as! Organizations
-            let infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(id: org.user_id).executeAsList()
+            let infos = fulcrumAuthQuery.selectOrgView(id: org.user_id).executeAsList()
             showLoginInfo(infos: infos)
         }
     }
@@ -113,29 +113,27 @@ class ViewController: UIViewController {
         if (response.user.contexts.count > 1) {
             showAccounts(accounts: response.user.contexts)
         } else {
-            let infos = fulcrumAuthQuery.selectJoinUserOrgByUserId(id: userID).executeAsList()
+            let infos = fulcrumAuthQuery.selectOrgView(id: userID).executeAsList()
             showLoginInfo(infos: infos)
         }
-        
-        
     }
     
     func showLoginInfo(infos: Array<Any>) {
         userEmailField.isHidden = true
         userPasswordField.isHidden = true
         loginButton.isHidden = true
-        
+
         loginInfoLabel.isHidden = false
         loginInfoLabel.numberOfLines = 20
-        
+
         var joinText = ""
-        
+
         for info in infos {
-            let join = info as! SelectJoinUserOrgByUserId
+            let join = info as! SelectOrgView
             joinText = "Success! \n\n You are logged in as \(join.first_name) \(join.last_name) in \(join.name) \n\n Your API token is \(join.token)"
-            
+
         }
-        
+
         loginInfoLabel.text = joinText
     }
     
