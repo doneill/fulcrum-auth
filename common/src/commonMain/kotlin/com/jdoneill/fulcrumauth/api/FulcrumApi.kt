@@ -17,7 +17,6 @@ class FulcrumApi {
 
     companion object {
         private const val BASE_URL = "https://api.fulcrumapp.com"
-        private const val BASE_LOCAL_URL = "http://10.0.0.19:3000"
 
         // public endpoints
         private const val API_V2 = "/api/v2"
@@ -30,7 +29,7 @@ class FulcrumApi {
         GlobalScope.launch(ApplicationDispatcher) {
             try {
                 val response = authClient.get<HttpStatement> {
-                    url("$BASE_LOCAL_URL$API_USERS")
+                    url("$BASE_URL$API_USERS")
                     header("Authorization", "Basic $authorization")
                 }.execute()
                 Json.nonstrict.parse(FulcrumAuthenticationResponse.serializer(), response.readText())
