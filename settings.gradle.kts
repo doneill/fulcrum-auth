@@ -23,9 +23,6 @@ pluginManagement {
 
 rootProject.name = "fulcrum-auth"
 
-include(
-    "app",
-    "common"
-    )
+include("app", "common", "web")
 
 enableFeaturePreview("GRADLE_METADATA")
