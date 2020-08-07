@@ -30,9 +30,8 @@ class ViewController: UIViewController {
         
         let driver = FulcrumAuthDriverFactory()
         let db = FulcrumAuthDriverFactoryKt.createDb(fulcrumAuthDriverFactory: driver)
+        
         fulcrumAuthQuery = db.fulcrumAuthModelQueries
-    
-    
     }
     
     @IBAction func onClick(_ sender: Any, forEvent event: UIEvent) {

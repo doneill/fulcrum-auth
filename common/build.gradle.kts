@@ -20,7 +20,6 @@ android {
 
 kotlin {
     android()
-    jvm()
 
     // select iOS target platform depending on the Xcode environment variables
     // iPhone simulator : presets.iosX64 | real iDevice 64 bit : presets.iosArm64
