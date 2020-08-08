@@ -46,4 +46,3 @@ SELECT * FROM organizations WHERE name = ?;
 
 selectOrgView:
 SELECT first_name, last_name, name, token FROM users INNER JOIN organizations ON organizations.user_id = users.id WHERE users.id = ?;
-VALUES(?);
