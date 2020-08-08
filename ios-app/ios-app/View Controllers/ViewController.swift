@@ -81,13 +81,8 @@ class ViewController: UIViewController {
     
     func setAccount(context: Contexts) {
         let orgId = context.id
-        let organizations = fulcrumAuthQuery.selectUserByOrganizationId(id: orgId).executeAsList()
-        
-        for organization in organizations {
-            let org = organization as! Organizations
-            let infos = fulcrumAuthQuery.selectOrgView(id: org.user_id).executeAsList()
-            showLoginInfo(infos: infos)
-        }
+        let infos = fulcrumAuthQuery.selectOrgView(id: orgId).executeAsList()
+        showLoginInfo(infos: infos)
     }
     
     func parseAccount(response: FulcrumAuthenticationResponse) {
@@ -112,8 +107,7 @@ class ViewController: UIViewController {
         if (response.user.contexts.count > 1) {
             showAccounts(accounts: response.user.contexts)
         } else {
-            let infos = fulcrumAuthQuery.selectOrgView(id: userID).executeAsList()
-            showLoginInfo(infos: infos)
+            setAccount(context: response.user.contexts[0])
         }
     }
     

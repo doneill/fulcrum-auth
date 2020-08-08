@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         builder.setTitle("Select Organization")
 
         val names = arrayOfNulls<String>(accounts.size)
-        for ( i in accounts.indices) {
+        for ( i in accounts.indices ) {
             names[i] = accounts[i].name
         }
 
@@ -80,13 +80,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private fun setAccount(context: Contexts) {
         val orgId = context.id
-        val organizations = fulcrumAuthQuery.selectUserByOrganizationId(orgId).executeAsList()
 
-        for (org in organizations) {
-            val orgInfo = fulcrumAuthQuery.selectOrgView(org.user_id).executeAsList()
-            showLoginInfo(orgInfo)
-        }
-
+        val orgInfo = fulcrumAuthQuery.selectOrgView(orgId).executeAsList()
+        showLoginInfo(orgInfo)
     }
 
     private fun parseAccount(response: FulcrumAuthenticationResponse) {
@@ -109,13 +105,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             if ( response.user.contexts.size > 1 ) {
                 showAccounts(response.user.contexts)
             } else {
-                val infos = fulcrumAuthQuery.selectOrgView(id).executeAsList()
-
-                for ( info in infos ) {
-                    Log.d("FulcrumAuth", info.toString())
-                }
-
-                showLoginInfo(infos)
+                setAccount(response.user.contexts[0])
             }
         }
     }
