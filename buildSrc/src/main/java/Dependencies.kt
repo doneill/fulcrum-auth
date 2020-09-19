@@ -1,11 +1,12 @@
 object Sdk {
-    const val MIN_SDK_VERSION = 26
+    const val MIN_SDK_VERSION = 21
     const val TARGET_SDK_VERSION = 29
     const val COMPILE_SDK_VERSION = 29
 }
 
 object Versions {
     const val APPCOMPAT = "1.1.0"
+    const val COMPOSE = "0.1.0-dev13"
     const val CONSTRAINT_LAYOUT = "1.1.3"
     const val COROUTINES = "1.3.5-native-mt"
     const val CORE_KTX = "1.3.0"
