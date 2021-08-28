@@ -17,12 +17,9 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        jcenter()
     }
 }
 
 rootProject.name = "fulcrum-auth"
 
 include("app", "common", "web")
-
-enableFeaturePreview("GRADLE_METADATA")

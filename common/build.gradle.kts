@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -12,14 +13,16 @@ android {
     defaultConfig {
         minSdkVersion(Sdk.MIN_SDK_VERSION)
         targetSdkVersion(Sdk.TARGET_SDK_VERSION)
-        versionCode = AppCoordinates.APP_VERSION_CODE
-        versionName = AppCoordinates.APP_VERSION_NAME
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions.jvmTarget = Versions.JVM
+        }
+    }
 
     // select iOS target platform depending on the Xcode environment variables
     // iPhone simulator : presets.iosX64 | real iDevice 64 bit : presets.iosArm64
@@ -37,49 +40,43 @@ kotlin {
         }
     }
 
-    js {
-        browser {  }
+    js(IR) {
+        useCommonJs()
+        browser()
     }
 
     sourceSets["commonMain"].dependencies {
         // kotlin
         implementation(kotlin("stdlib-common", BuildPluginsVersion.KOTLIN))
         // Coroutines
-        implementation(Coroutines.COMMON)
+        implementation(Coroutines.CORE)
         // Ktor
-        implementation(Ktor.COMMON_CORE)
+        implementation(Ktor.CORE)
         implementation(Ktor.AUTH)
-        implementation(Ktor.AUTH_JVM)
-        implementation(Ktor.AUTH_NATIVE)
         // Serialize
-        implementation(Kotlin.SERIALIZATION_COMMON)
+        implementation(Kotlin.SERIALIZATION_JSON)
         // SQL Delight
         implementation(SqlDelight.RUNTIME)
     }
 
     sourceSets["androidMain"].dependencies {
-        // kotlin
-        implementation(kotlin("stdlib", BuildPluginsVersion.KOTLIN))
-
         // Coroutines
-        implementation(Coroutines.JDK)
-        implementation(Coroutines.ANDROID)
-
+        implementation(Coroutines.CORE)
         // Ktor
         implementation(Ktor.ANDROID)
         // Serialize
-        implementation(Kotlin.SERIALIZATION)
+        implementation(Kotlin.SERIALIZATION_JSON)
         // SQL Delight
         implementation(SqlDelight.RUNTIME_DRIVER_ANDROID)
     }
 
     sourceSets["iosMain"].dependencies {
         // Coroutines
-        implementation(Coroutines.NATIVE)
+        implementation(Coroutines.CORE)
         // Ktor
         implementation(Ktor.IOS)
         // Serialize
-        implementation(Kotlin.SERIALIZATION_IOS)
+        implementation(Kotlin.SERIALIZATION_JSON)
         // SQL Delight
         implementation(SqlDelight.RUNTIME_DRIVER_IOS)
     }
@@ -91,8 +88,9 @@ kotlin {
         implementation(Coroutines.WEB)
         // Ktor
         implementation(Ktor.WEB)
+//        implementation(Ktor.AUTH_JS)
         // Serialize
-        implementation(Kotlin.SERIALIZATION_WEB)
+        implementation(Kotlin.SERIALIZATION_JSON)
         // SQL Delight
         implementation(SqlDelight.RUNTIME_DRIVER_JS)
     }
