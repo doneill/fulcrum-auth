@@ -32,7 +32,11 @@ class FulcrumApi {
                     url("$BASE_URL$API_USERS")
                     header("Authorization", "Basic $authorization")
                 }.execute()
-                Json.nonstrict.parse(FulcrumAuthenticationResponse.serializer(), response.readText())
+
+                val json = Json {
+                    ignoreUnknownKeys = true
+                }
+                json.decodeFromString(FulcrumAuthenticationResponse.serializer(), response.readText())
                     .also(success)
             } catch (e: Exception) {
                 failure(e)
