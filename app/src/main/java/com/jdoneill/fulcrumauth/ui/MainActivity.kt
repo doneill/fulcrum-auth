@@ -135,8 +135,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private fun handleError(ex: Throwable) {
         launch(Main) {
-            val msg = ex.message
-            Log.d("Authorization Response", msg)
+            Log.d("Authorization Response", ex.message.toString())
         }
     }
 }
