@@ -1,4 +1,8 @@
 # Fulcrum Auth
+![badge][badge-android]
+![badge][badge-ios]
+![badge][badge-js]
+
 Kotlin Multiplatform app containing authentication with [Fulcrum](https://www.fulcrumapp.com/)
 
 ![fulcrum auth image](fulcrum-auth.png)
