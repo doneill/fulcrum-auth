@@ -17,7 +17,7 @@ object Versions {
     const val COROUTINES = "1.5.1-native-mt"
     const val CORE_KTX = "1.3.0"
     const val JVM = "1.8"
-    const val KOTLIN_WRAPPERS_BOM = "0.0.1-pre.237-kotlin-1.5.30"
+    const val KOTLIN_WRAPPERS_BOM = "0.0.1-pre.238-kotlin-1.5.30"
     const val KOTLIN_REACT_NPM = "17.0.2"
     const val KTOR = "1.6.3"
     const val MATERIAL = "1.3.0-alpha02"
