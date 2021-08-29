@@ -1,11 +1,12 @@
 import react.*
+
 import styled.styledDiv
 
-external interface AuthInfoProps: RProps {
+external interface AuthInfoProps: PropsWithChildren {
     var response: String
 }
 
-class AuthInfo: RComponent<AuthInfoProps, RState>() {
+class AuthInfo: RComponent<AuthInfoProps, State>() {
     override fun RBuilder.render() {
         styledDiv {
             +props.response
@@ -13,7 +14,7 @@ class AuthInfo: RComponent<AuthInfoProps, RState>() {
     }
 }
 
-fun RBuilder.authInfo(handler: AuthInfoProps.() -> Unit): ReactElement {
+fun RBuilder.authInfo(handler: AuthInfoProps.() -> Unit) {
     return child(AuthInfo::class) {
         this.attrs(handler)
     }
