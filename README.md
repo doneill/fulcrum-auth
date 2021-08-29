@@ -15,3 +15,7 @@ Kotlin Multiplatform app containing authentication with [Fulcrum](https://www.fu
 
 ## Licensing
 A copy of the license is available in the repository's [LICENSE](LICENSE) file.
+
+[badge-android]: http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat
+[badge-ios]: http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat
+[badge-js]: http://img.shields.io/badge/platform-js-F8DB5D.svg?style=flat
