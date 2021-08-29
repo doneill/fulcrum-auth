@@ -1,17 +1,20 @@
 import com.jdoneill.fulcrumauth.api.FulcrumApi
 import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
+
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.css.*
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
+
 import org.w3c.dom.HTMLInputElement
 
 import react.*
+import react.dom.*
 import styled.*
 
-external interface AppState : RState {
+external interface AppState : State {
     var htmlResponse: String
     var email: String
     var password: String
