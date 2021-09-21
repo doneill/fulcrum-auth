@@ -52,6 +52,7 @@ kotlin {
         implementation(Coroutines.CORE)
         // Ktor
         implementation(Ktor.CORE)
+        implementation(Ktor.SERIALIZATION)
         implementation(Ktor.AUTH)
         // Serialize
         implementation(Kotlin.SERIALIZATION_JSON)
