@@ -13,7 +13,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class FulcrumApi {
+class FulcrumApi: FulcrumService {
 
     companion object {
         private const val BASE_URL = "https://api.fulcrumapp.com"
@@ -42,5 +42,18 @@ class FulcrumApi {
                 failure(e)
             }
         }
+    }
+
+    override suspend fun getAccount(authorization: String): FulcrumAuthenticationResponse {
+        val response = authClient.get<HttpStatement> {
+            url("$BASE_URL$API_USERS")
+            header("Authorization", "Basic $authorization")
+        }.execute()
+
+        val json = Json {
+            ignoreUnknownKeys = true
+        }
+
+        return json.decodeFromString(FulcrumAuthenticationResponse.serializer(), response.readText())
     }
 }
