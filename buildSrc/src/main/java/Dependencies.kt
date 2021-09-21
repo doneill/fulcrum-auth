@@ -1,7 +1,7 @@
 object Sdk {
-    const val MIN_SDK_VERSION = 21
-    const val TARGET_SDK_VERSION = 30
-    const val COMPILE_SDK_VERSION = 30
+    const val MIN_SDK_VERSION = 26
+    const val TARGET_SDK_VERSION = 31
+    const val COMPILE_SDK_VERSION = 31
 }
 
 object BuildPluginsVersion {
@@ -57,6 +57,7 @@ object Ktor {
     const val ANDROID = "io.ktor:ktor-client-android:${Versions.KTOR}"
     const val CORE = "io.ktor:ktor-client-core:${Versions.KTOR}"
     const val IOS = "io.ktor:ktor-client-ios:${Versions.KTOR}"
+    const val SERIALIZATION ="io.ktor:ktor-client-serialization:${Versions.KTOR}"
     const val LOGGING = "io.ktor:ktor-client-logging:${Versions.KTOR}"
     const val WEB = "io.ktor:ktor-client-js:${Versions.KTOR}"
     const val WEB_LOGGING = "io.ktor:ktor-client-logging-js:${Versions.KTOR}"
