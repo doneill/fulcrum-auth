@@ -29,34 +29,34 @@ class App : RComponent<RProps, AppState>() {
     }
 
     private fun parseAccount(response: FulcrumAuthenticationResponse) {
-        val mainScope = MainScope()
-        mainScope.launch {
-            val firstName = response.user.first_name
-            val lastName = response.user.last_name
+        val firstName = response.user.first_name
+        val lastName = response.user.last_name
 
-            var apiToken = ""
+        var apiToken = ""
 
-            for (context in response.user.contexts) {
-                apiToken = context.api_token
-            }
-
-            setState {
-                htmlResponse = """
-                    Success!
-                    You are logged in as $firstName $lastName
-                    Your API token is $apiToken
-                """.trimIndent()
-            }
+        for (context in response.user.contexts) {
+            apiToken = context.api_token
         }
 
+        setState {
+            htmlResponse = """
+                Success!
+                You are logged in as $firstName $lastName
+                Your API token is $apiToken
+            """.trimIndent()
+        }
     }
 
     private fun handleError(ex: Throwable) {
-        val mainScope = MainScope()
-        mainScope.launch {
-            val msg = ex.message
-            console.log("Authorization Response", msg)
+        val msg = ex.message
+
+        setState {
+            htmlResponse = """
+                Error: $msg
+            """.trimIndent()
         }
+
+        console.log("Authorization Response", msg)
     }
 
     private fun jsEncode(auth: Any): String {
@@ -120,11 +120,15 @@ class App : RComponent<RProps, AppState>() {
 
                     val auth = jsEncode("$currentEmail:$currentPassword")
 
-                    api.getAccount(
-                            authorization = auth,
-                            success = ::parseAccount,
-                            failure = ::handleError
-                    )
+                    val mainScope = MainScope()
+                    mainScope.launch {
+                        try {
+                            val response = api.getAccount(auth)
+                            parseAccount(response)
+                        } catch (t: Throwable) {
+                            handleError(t)
+                        }
+                    }
                 }
             }
             +"Login"

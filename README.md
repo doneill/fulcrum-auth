@@ -3,7 +3,7 @@
 ![badge][badge-ios]
 ![badge][badge-js]
 
-Kotlin Multiplatform app containing authentication with [Fulcrum](https://www.fulcrumapp.com/)
+Kotlin Multiplatform app containing authentication with [Fulcrum](https://learn.fulcrumapp.com/)
 
 ![fulcrum auth image](fulcrum-auth.png)
 
@@ -12,6 +12,11 @@ Kotlin Multiplatform app containing authentication with [Fulcrum](https://www.fu
  - [Kotlin Ktor](https://ktor.io/clients/index.html)
  - [Kotlin Serialization](https://github.com/Kotlin/kotlinx.serialization)
  - [SQLDelight](https://cashapp.github.io/sqldelight/)
+
+## Contributors
+<a href="https://github.com/doneill/fulcrum-auth/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=doneill/fulcrum-auth" />
+</a>
 
 ## Licensing
 A copy of the license is available in the repository's [LICENSE](LICENSE) file.

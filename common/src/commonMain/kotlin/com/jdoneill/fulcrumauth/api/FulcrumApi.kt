@@ -1,6 +1,5 @@
 package com.jdoneill.fulcrumauth.api
 
-import com.jdoneill.fulcrumauth.common.ApplicationDispatcher
 import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
 
 import io.ktor.client.request.get
@@ -9,11 +8,9 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readText
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class FulcrumApi {
+class FulcrumApi: FulcrumService {
 
     companion object {
         private const val BASE_URL = "https://api.fulcrumapp.com"
@@ -25,22 +22,16 @@ class FulcrumApi {
 
     private val authClient = HttpClientAuthProvider().httpAuthClient
 
-    fun getAccount(authorization: String, success: (FulcrumAuthenticationResponse) -> Unit, failure: (Throwable) -> Unit) {
-        GlobalScope.launch(ApplicationDispatcher) {
-            try {
-                val response = authClient.get<HttpStatement> {
-                    url("$BASE_URL$API_USERS")
-                    header("Authorization", "Basic $authorization")
-                }.execute()
+    override suspend fun getAccount(authorization: String): FulcrumAuthenticationResponse {
+        val response = authClient.get<HttpStatement> {
+            url("$BASE_URL$API_USERS")
+            header("Authorization", "Basic $authorization")
+        }.execute()
 
-                val json = Json {
-                    ignoreUnknownKeys = true
-                }
-                json.decodeFromString(FulcrumAuthenticationResponse.serializer(), response.readText())
-                    .also(success)
-            } catch (e: Exception) {
-                failure(e)
-            }
+        val json = Json {
+            ignoreUnknownKeys = true
         }
+
+        return json.decodeFromString(FulcrumAuthenticationResponse.serializer(), response.readText())
     }
 }

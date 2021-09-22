@@ -71,11 +71,15 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private fun getAccount(user: String, password: String) {
         val auth = Base64.getEncoder().encodeToString("$user:$password".toByteArray())
-        api.getAccount(
-            authorization = auth,
-            success = ::parseAccount,
-            failure = ::handleError
-        )
+
+        launch {
+            try {
+                val response = api.getAccount(auth)
+                parseAccount(response = response)
+            } catch (e: Exception) {
+                Log.d("Authorization Response", e.message.toString())
+            }
+        }
     }
 
     private fun setAccount(context: Contexts) {
@@ -131,11 +135,5 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
 
         loginInfoView.text = getString(R.string.user_info, firstName, lastName, org, token)
-    }
-
-    private fun handleError(ex: Throwable) {
-        launch(Main) {
-            Log.d("Authorization Response", ex.message.toString())
-        }
     }
 }

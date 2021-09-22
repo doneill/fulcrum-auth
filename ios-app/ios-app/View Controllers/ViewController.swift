@@ -68,15 +68,17 @@ class ViewController: UIViewController {
         let loginString = String(format: "%@:%@", user, password)
         let loginData = loginString.data(using: String.Encoding.utf8)!
         let base64LoginString = loginData.base64EncodedString()
-        
-        api.getAccount(
-            authorization: base64LoginString,
-            success: { data in
-                self.parseAccount(response: data)
-        }, failure: {
-            self.handleError($0.message)
 
-        })
+        api.getAccount(authorization: base64LoginString) { response, error in
+            if let data = response {
+                self.parseAccount(response: data)
+            }
+            if let errorMsg = error {
+                self.handleError(errorMsg.localizedDescription)
+            }
+
+        }
+
     }
     
     func setAccount(context: Contexts) {
