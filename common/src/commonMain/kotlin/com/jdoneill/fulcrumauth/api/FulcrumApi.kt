@@ -1,6 +1,5 @@
 package com.jdoneill.fulcrumauth.api
 
-import com.jdoneill.fulcrumauth.common.ApplicationDispatcher
 import com.jdoneill.fulcrumauth.model.FulcrumAuthenticationResponse
 
 import io.ktor.client.request.get
@@ -9,8 +8,6 @@ import io.ktor.client.request.url
 import io.ktor.client.statement.HttpStatement
 import io.ktor.client.statement.readText
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
 class FulcrumApi: FulcrumService {
