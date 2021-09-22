@@ -25,25 +25,6 @@ class FulcrumApi: FulcrumService {
 
     private val authClient = HttpClientAuthProvider().httpAuthClient
 
-    fun getAccount(authorization: String, success: (FulcrumAuthenticationResponse) -> Unit, failure: (Throwable) -> Unit) {
-        GlobalScope.launch(ApplicationDispatcher) {
-            try {
-                val response = authClient.get<HttpStatement> {
-                    url("$BASE_URL$API_USERS")
-                    header("Authorization", "Basic $authorization")
-                }.execute()
-
-                val json = Json {
-                    ignoreUnknownKeys = true
-                }
-                json.decodeFromString(FulcrumAuthenticationResponse.serializer(), response.readText())
-                    .also(success)
-            } catch (e: Exception) {
-                failure(e)
-            }
-        }
-    }
-
     override suspend fun getAccount(authorization: String): FulcrumAuthenticationResponse {
         val response = authClient.get<HttpStatement> {
             url("$BASE_URL$API_USERS")
