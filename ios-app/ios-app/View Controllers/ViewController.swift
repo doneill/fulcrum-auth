@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         loginInfoLabel.isHidden = true
         
         userEmailField.clearButtonMode = .whileEditing
@@ -30,8 +30,10 @@ class ViewController: UIViewController {
         
         let driver = FulcrumAuthDriverFactory()
         let db = FulcrumAuthDriverFactoryKt.createDb(fulcrumAuthDriverFactory: driver)
-        
         fulcrumAuthQuery = db.fulcrumAuthModelQueries
+
+        let path = dbPath("FulcrumAuth.db")
+        NSLog("Database: \(path)", "")
     }
     
     @IBAction func onClick(_ sender: Any, forEvent event: UIEvent) {
@@ -131,8 +133,15 @@ class ViewController: UIViewController {
 
         loginInfoLabel.text = joinText
     }
-    
-    
+
+    func dbPath(_ database: String) -> String {
+        let appDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.applicationSupportDirectory,
+                FileManager.SearchPathDomainMask.userDomainMask,
+                true)
+
+        return "\(appDir[0])/databases/\(database)"
+    }
+
     internal func handleError(_ error: String?){
         let message = error ?? "An unknown error occurred. Retry?"
         print(message)
