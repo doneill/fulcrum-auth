@@ -1,8 +1,6 @@
 package com.jdoneill.fulcrumauth.db
 
 import com.google.common.truth.Truth.assertThat
-import com.jdoneill.db.FulcrumAuth
-import com.jdoneill.db.FulcrumAuthModelQueries
 import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
 
 import org.junit.Before
